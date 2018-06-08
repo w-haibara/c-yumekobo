@@ -45,7 +45,12 @@ int or(int a, int b){
 }
 
 int not(int a){
-    int s = 1-a;
+    int s;
+    if(a==1){
+        s=0;
+    }else{
+        s=1;
+    }
     return s;
 }
 

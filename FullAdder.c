@@ -6,37 +6,28 @@ int not(int a);
 int nand(int a, int b);
 int nor(int a, int b);
 int exor(int a, int b);
+void HA(int a,int b,int *s,int *c);
+void FA(int a,int b,int pre_c,int *s,int *c);
 
 int main(void){
     int a,b;
+    int s0,c0;
     while(1){
-        printf("\naの値を入力（0もしくは1）");
+        printf("\nINPUT A : ");
         scanf("%d",&a);
         if(a!=0 && a!=1){
             printf("\nerror!\n");
             break;
         }
 
-        printf("\nbの値を入力（0もしくは1）");
+        printf("\nINPUT B : ");
         scanf("%d",&b);
         if(b!=0 && b!=1){
             printf("\nerror!\n");
             break;
         }
-
-        printf("\na and b = %d\n",and(a,b));
-
-        printf("\na or b = %d\n",or(a,b));
-
-        printf("\n~a = %d\n",not(a));
-
-        printf("\n~b = %d\n",not(b));
-
-        printf("\n~(a and b) = %d\n",nand(a,b));
-
-        printf("\n~(a or b) = %d\n",nor(a,b));
-
-        printf("\na exor b = %d\n",exor(a,b));
+        HA(a,b,&s0,&c0);
+        printf("\ns0 = %d, c0 = %d\n",s0,c0);
 
     return 0;
     }
@@ -75,4 +66,26 @@ int nor(int a, int b){
 int exor(int a,int b){
     int s=a^b;
     return s;
+}
+
+void HA(int a,int b,int *s,int *c){
+    int or1, and1,not1,and2;
+    or1 = or(a,b);
+    and1 = and(a,b);
+    not1 = not(and1);
+    and2 = and(or1,not1);
+
+    *s = and2;
+    *c = and1; 
+}
+
+void FA(int a,int b,int pre_c,int *s,int *c){
+    int or1, and1,not1,and2;
+    or1 = or(a,b);
+    and1 = and(a,b);
+    not1 = not(and1);
+    and2 = and(or1,not1);
+
+    *s = and2;
+    *c = and1; 
 }
